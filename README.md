@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GENESIS — Beasiswa Scout AI
 
-## Getting Started
+Platform multi-agent AI untuk pemerataan akses beasiswa bagi lulusan SMA/MA/SMK.
 
-First, run the development server:
+---
+
+## 🚀 Quick Start
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# → Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Struktur Proyek
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                         # Next.js App Router
+│   ├── layout.tsx               # Root layout + Inter font
+│   ├── globals.css              # Global styles, animations
+│   ├── page.tsx                 # Landing page (/)
+│   ├── input/
+│   │   └── page.tsx             # Multi-step form (/input)
+│   └── dashboard/
+│       └── page.tsx             # Dashboard hasil (/dashboard)
+│
+├── components/
+│   ├── layout/
+│   │   └── Navbar.tsx           # Navbar (full/minimal variant)
+│   ├── ui/
+│   │   ├── Icons.tsx            # All SVG icons
+│   │   ├── CircleProgress.tsx   # Animated circular % ring
+│   │   ├── StatusPanel.tsx      # "Status Verifikasi" sidebar panel
+│   │   ├── StepBar.tsx          # 4-segment progress bar
+│   │   └── ScholarshipCard.tsx  # Scholarship result card
+│   ├── sections/
+│   │   └── HeroSection.tsx      # Landing hero + floating card
+│   └── steps/
+│       ├── Step1DataPribadi.tsx # NIK + WhatsApp form
+│       ├── Step2UploadDokumen.tsx # 4 upload cards
+│       ├── Step3Verifikasi.tsx  # Animated checklist
+│       └── Step4Selesai.tsx     # Success screen
+│
+├── lib/
+│   ├── data.ts                  # All dummy data constants
+│   └── utils.ts                 # cn() helper
+│
+└── types/
+    └── index.ts                 # TypeScript interfaces
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🌐 Deploy ke Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Option A — Vercel CLI (recommended)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm i -g vercel
+vercel --prod
+```
 
-## Deploy on Vercel
+### Option B — GitHub + Vercel Dashboard
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push repo ke GitHub
+2. Buka https://vercel.com/new
+3. Import repository
+4. Framework: **Next.js** (auto-detect)
+5. Klik **Deploy**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🎨 Design System
+
+| Token | Value | Keterangan |
+|---|---|---|
+| `bg-navy-900` | `#0a0f1e` | Background utama |
+| `bg-navy-600` | `#131929` | Surface card |
+| `bg-navy-400` | `#1e2d45` | Border default |
+| `text-cyan` | `#00e5cc` | Aksen primer (CTA, heading) |
+| `cyan-dark` | `#06b6d4` | Aksen sekunder (ring) |
+| `success` | `#22c55e` | Checklist, status done |
+| `text-muted` | `#7a8ba8` | Teks sekunder |
+| `text-label` | `#94a3b8` | Label & caption |
+
+---
+
+## 📄 Halaman
+
+| Route | Deskripsi |
+|---|---|
+| `/` | Landing page |
+| `/input` | Multi-step form verifikasi (Step 1–4) |
+| `/dashboard` | Hasil rekomendasi beasiswa |
+
+---
+
+## 🔧 Tech Stack
+
+- **Next.js 14** — App Router
+- **TypeScript** — strict mode
+- **Tailwind CSS** — utility styling
+- **Inter** — Google Fonts (via next/font)
+- **Lucide React** — icons (via custom wrapper)
+
+---
+
+## 📌 Catatan Pengembangan Lanjutan
+
+1. **API Routes** — tambahkan `src/app/api/verify/route.ts` untuk handle submit form
+2. **State Management** — gunakan Zustand atau Context API untuk form state antar halaman
+3. **Database** — integrasikan Prisma + Supabase untuk menyimpan data pendaftar
+4. **Auth** — tambahkan NextAuth.js untuk autentikasi
+5. **AI Agent** — integrasikan Anthropic API di server actions
