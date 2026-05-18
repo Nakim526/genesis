@@ -1,26 +1,149 @@
+/* src/app/globals.css */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ── Custom scrollbar matching dark theme ───────────────── */
+::-webkit-scrollbar          { width: 6px; height: 6px; }
+::-webkit-scrollbar-track    { background: #0a0f1e; }
+::-webkit-scrollbar-thumb    { background: #1e2d45; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #243450; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base resets ─────────────────────────────────────────── */
+* { box-sizing: border-box; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  font-family: var(--font-inter), "Inter", system-ui, sans-serif;
+  background-color: #0a0f1e;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Input base styles ───────────────────────────────────── */
+input {
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder {
+  color: #3d4f6a;
+}
+
+input:focus {
+  outline: none;
+  border-color: #00e5cc !important;
+  box-shadow: 0 0 0 3px rgba(0, 229, 204, 0.12);
+}
+
+/* ── Button base ─────────────────────────────────────────── */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Dot grid background utility ─────────────────────────── */
+.bg-dot-grid {
+  background-image: radial-gradient(circle, #1e3a5f 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ── Glow utilities ──────────────────────────────────────── */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 229, 204, 0.15),
+              0 0 40px rgba(0, 229, 204, 0.06);
+}
+
+.glow-cyan-sm {
+  box-shadow: 0 0 12px rgba(0, 229, 204, 0.2);
+}
+
+/* ── SVG circle progress animation ──────────────────────── */
+.circle-progress {
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Card hover lift ─────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Animation helpers ───────────────────────────────────── */
+.animate-fade-up {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+.animate-fade-up-delay {
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.2s forwards;
+}
+
+.animate-scale-in {
+  opacity: 0;
+  animation: scaleIn 0.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.93); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1);    }
+  50%      { opacity: 0.5; transform: scale(0.8); }
+}
+
+.dot-pulse { animation: dotPulse 1.6s ease-in-out infinite; }
+
+/* ── Shimmer loading skeleton ────────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #131929 0%,
+    #1e2d45 50%,
+    #131929 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite linear;
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ── Step progress bar ───────────────────────────────────── */
+.step-bar-fill {
+  transition: background-color 0.4s ease;
+}
+
+/* ── Upload dashed border animation ─────────────────────── */
+.upload-card {
+  transition: border-color 0.25s, background-color 0.25s, transform 0.15s;
+}
+
+.upload-card:hover {
+  border-color: #00e5cc !important;
+  transform: translateY(-2px);
+}
+
+/* ── Verification step row transition ───────────────────── */
+.verif-row {
+  transition: border-color 0.35s ease, background-color 0.35s ease;
 }
